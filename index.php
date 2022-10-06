@@ -1,5 +1,17 @@
 <?php
-// показывать или нет выполненные задачи
+$categories=["Входящие","Учеба","Работа","Домащние дела","Авто"];
+$todos=[
+    ["name"=>"Собеседование в IT компании","date"=>"01.12.2019","work"=>"Работа","status"=>"false"],
+    ["name"=>"Выполнить тестовое задание","25.12.2019","Работа","false"],
+    ["name"=>"Сделать задание первого раздела","21.12.2019","Учеба","true"],
+    ["name"=>"Встреча с другом","22.12.2019","Входящие","false"],
+    ["name"=>"Купить корм для кота","null","Домашние дела","false"],
+    ["name"=>"Заказать пиццу","null","Домашние дела","false"]];
+
+
+
+
+
 $show_complete_tasks = rand(0, 1);
 ?>
 <!DOCTYPE html>
@@ -42,10 +54,12 @@ $show_complete_tasks = rand(0, 1);
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Название проекта</a>
-                            <span class="main-navigation__list-item-count">0</span>
-                        </li>
+                        <?php foreach ($categories as $category):?>
+                            <li class="main-navigation__list-item">
+                                <a class="main-navigation__list-item-link" href="#"><?php $category; ?></a>
+                                <span class="main-navigation__list-item-count">0</span>
+                            </li>
+                        <?php endforeach;?>
                     </ul>
                 </nav>
 
