@@ -1,18 +1,52 @@
 <?php
-$categories=["Входящие","Учеба","Работа","Домащние дела","Авто"];
-$todos=[
-    ["name"=>"Собеседование в IT компании","date"=>"01.12.2019","work"=>"Работа","status"=>"false"],
-    ["name"=>"Выполнить тестовое задание","25.12.2019","Работа","false"],
-    ["name"=>"Сделать задание первого раздела","21.12.2019","Учеба","true"],
-    ["name"=>"Встреча с другом","22.12.2019","Входящие","false"],
-    ["name"=>"Купить корм для кота","null","Домашние дела","false"],
-    ["name"=>"Заказать пиццу","null","Домашние дела","false"]];
-
-
-
-
-
 $show_complete_tasks = rand(0, 1);
+$categories=["Входящие",
+    "Учеба",
+    "Работа",
+    "Домашние дела",
+    "Авто"];
+$posts = [
+    [
+        "title"=>"Собеседование
+        в IT компании",
+        "data"=>"01.12.2019",
+        "categories"=>"Работа",
+        "is_done"=>false
+    ],
+    [
+        "title"=>"Выполнить тестовое
+        задание",
+        "data"=>"25.12.2019",
+        "categories"=>"Работа",
+        "is_done"=>false
+    ],
+    [
+        "title"=>"Сделать задание первого
+        раздела",
+        "data"=>"21.12.2019",
+        "categories"=>"Учеба",
+        "is_done"=>true
+    ],
+    [
+        "title"=>"Встреча с другом",
+        "data"=>"22.12.2019",
+        "categories"=>"Входящие",
+        "is_done"=>false
+    ],
+    [
+        "title"=>"Купить корм для кота",
+        "data"=>"null",
+        "categories"=>"Домашние дела",
+        "is_done"=>false
+    ],
+    [
+        "title"=>"Заказать пиццу",
+        "data"=>"null",
+        "categories"=>"Домашние дела",
+        "is_done"=>false
+    ],
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -26,6 +60,20 @@ $show_complete_tasks = rand(0, 1);
 </head>
 
 <body>
+<?php
+    function count_category($post_list,$category)
+    {
+
+        $result = 0;
+        foreach ($post_list as $post)
+            if ($post["categories"] === $category) {
+                $result = $result + 1;
+            }
+
+
+        return $result;
+    }
+?>
 <h1 class="visually-hidden">Дела</h1>
 
 <div class="page-wrapper">
@@ -56,8 +104,8 @@ $show_complete_tasks = rand(0, 1);
                     <ul class="main-navigation__list">
                         <?php foreach ($categories as $category):?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?php $category; ?></a>
-                                <span class="main-navigation__list-item-count">0</span>
+                                <a class="main-navigation__list-item-link" href="#"><?= $category ?></a>
+                                <span class="main-navigation__list-item-count"><?= count_category($posts,$category) ?></span>
                             </li>
                         <?php endforeach;?>
                     </ul>
@@ -92,19 +140,31 @@ $show_complete_tasks = rand(0, 1);
                 </div>
 
                 <table class="tasks">
+                    <?php foreach ($posts as $post): ?>
                     <tr class="tasks__item task">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
+                                <span class="checkbox__text"><?= $post["title"]?></span>
                             </label>
                         </td>
 
-                        <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
+                        <td class="task__select">
+
+                            <span class="task__date"><?=$post["data"]?></span>
+
                         </td>
 
-                        <td class="task__date"></td>
+                        <td class="task__select">
+
+                            <span class="task__categories"><?=$post["categories"]?></span>
+                        </td>
+                        <td class="task--completed">
+                            <?php if($show_complete_tasks===0):?>
+                            <span class="task--completed"><?=$post["is_done"]?></span>
+                            <?php endif;?>
+                        </td>
+
                     </tr>
                     <?php if($show_complete_tasks == 1): ?>
                     <tr class="tasks__item task task--completed ">
@@ -123,6 +183,7 @@ $show_complete_tasks = rand(0, 1);
 
                     </tr>
                     <?php endif; ?>
+                    <?php endforeach; ?>
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
                 </table>
             </main>
