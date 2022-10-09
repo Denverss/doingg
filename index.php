@@ -62,4 +62,23 @@ function count_category($post_list,$category)
 require_once 'helpers .php';
 $page = include_template('layout.php', ['title' =>'Дела в порядке', 'categories' => $categories, 'posts' => $posts , 'show_complete_tasks' => $show_complete_tasks]);
 print $page;
+$Content = include_template('layout.php', ['content', 'categories' => $categories, 'posts' => $posts , 'show_complete_tasks' => $show_complete_tasks]);
+print $Content;
+function include_template($categories, array $posts = []) {
+    $categories = 'templates/' . $categories;
+    $result = '';
+
+    if (!is_readable($categories)) {
+        return $result;
+    }
+
+    ob_start();
+    extract($$posts);
+    require $categories;
+
+    $result = ob_get_clean();
+
+    return $result;
+}
+
 ?>
