@@ -1,5 +1,5 @@
 <?php
-$Content = include_template('layout.php', ['content' =>'<div class="content">
+$Content = include_template('layout.php', ['content' => '<div class="content">
 <section class="content__side">
     <h2 class="content__side-heading">Проекты</h2>
 
@@ -15,7 +15,7 @@ $Content = include_template('layout.php', ['content' =>'<div class="content">
     </nav>
 
     <a class="button button--transparent button--plus content__side-button"
-       href="pages/form-project.html" target="project_add">Добавить проект</a>
+       href="form-project.html" target="project_add">Добавить проект</a>
 </section>
 
 <main class="content__main">

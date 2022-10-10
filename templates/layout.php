@@ -34,7 +34,7 @@
             </div>
         </header>
 
-        <div><?= $Content ?></div>
+        <div><?= $content ?></div>
 
     </div>
 </div>
