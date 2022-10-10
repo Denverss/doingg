@@ -141,48 +141,24 @@ $posts = [
 
                 <table class="tasks">
                     <?php foreach ($posts as $post): ?>
-                    <tr class="tasks__item task">
-                        <td class="task__select">
-                            <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text"><?= $post["title"]?></span>
-                            </label>
-                        </td>
+                        <?php if ($show_complete_tasks === 0 && $post["is_done"]): ?>
+                            <?php continue; ?>
+                        <?php else: ?>
+                            <tr class="tasks__item task <?= ($post["is_done"]) ? 'task--completed' : ''?>">
+                                <td class="task__select">
+                                    <label class="checkbox task__checkbox">
+                                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                        <span class="checkbox__text"><?= $post["title"]?></span>
+                                    </label>
+                                </td>
+                                <td class="task__file">
+                                    <a class="download-link" href="#">Home.psd</a>
+                                </td>
 
-                        <td class="task__select">
+                                <td class="task__date"><?= $post["data"] ?></td>
 
-                            <span class="task__date"><?=$post["data"]?></span>
-
-                        </td>
-
-                        <td class="task__select">
-
-                            <span class="task__categories"><?=$post["categories"]?></span>
-                        </td>
-                        <td class="task--completed">
-                            <?php if($show_complete_tasks===0):?>
-                            <span class="task--completed"><?=$post["is_done"]?></span>
-                            <?php endif;?>
-                        </td>
-
-                    </tr>
-                    <?php if($show_complete_tasks == 1): ?>
-                    <tr class="tasks__item task task--completed ">
-
-                        <td class="task__select">
-
-                            <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                <span class="checkbox__text">Записаться на интенсив "Базовый PHP"</span>
-                            </label>
-                        </td>
-                        <td class="task__date"10.10.2019</td>
-                        <td class="task__controls">
-
-                        </td>
-
-                    </tr>
-                    <?php endif; ?>
+                            </tr>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
                 </table>
