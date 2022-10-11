@@ -60,4 +60,10 @@ $content=include_template('main.php',['show_complete_tasks'=>$show_complete_task
 $page=include_template('Layout.php', [ 'data'=>$data, 'title'=>$title,'show_complete_tasks'=>$show_complete_tasks, 'categories'=>$categories, 'posts'=>$posts]);
 echo $page;
 
+$host = 'localhost';
+$dbName = 'doing';
+$userName= 'root';
+$password= '';
+
+
 ?>

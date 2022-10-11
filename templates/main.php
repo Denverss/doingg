@@ -28,7 +28,7 @@
                 <?php if ($show_complete_tasks === 0 && $post["is_done"]): ?>
                      <?php continue; ?>
                  <?php else: ?>
-                     <tr class="tasks__item task<?php if (getTime($post['data']) <= 24):?> <?php endif;?> <?php if($post["is_done"] === true):?>post--completed <?php endif; ?> <?= ($post["is_done"]) ? 'task--completed' : ''?>">
+                     <tr class="tasks__item task<?php if (getTime($post['data']) <= 24):?> <?php endif;?> <?php if($post["is_done"] === true):?>task--important <?php endif; ?> <?= ($post["is_done"]) ? 'task--completed' : ''?>">
                             <td class="task__select">
                              <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">

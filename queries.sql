@@ -19,10 +19,11 @@ CREATE TABLE posts (
                      id			BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                      user_id		BIGINT NOT NULL,
                      date_create DATETIME NOT NULL,
-                     category_id	TEXT NOT NULL,
+                     category_id	BIGINT NOT NULL,
                      title		VARCHAR(255) NOT NULL,
-                     is_done VARCHAR(1),
-                     FOREIGN KEY(user_id) REFERENCES users(id)
+                     is_done VARCHAR(1) ,
+                     FOREIGN KEY(user_id) REFERENCES users(id),
+                      FOREIGN KEY(category_id) REFERENCES  categories(id)
 
 );
 
@@ -39,12 +40,12 @@ VALUES ('Andrew', 'my@mail.ru', '$2y$10$azTPD8NrWOdSm5GIrE5J/OE9Usc5JB4rq4CpR4xY
 ('Oli','anonymus@mail.ru','olyaSyperstar');
 
 INSERT INTO posts(user_id, title,date_create,category_id,is_done)
-VALUES (1,'Собеседование в IT компании', '01.12.2019','Работа','false'),
-       (2,'Выполнить тестовое задание', '25.12.2019','Работа','false'),
-       (3,'Сделать задание первогораздела', '21.12.2019','Учеба','true'),
-       (1,'Встреча с другом', '22.12.2019','Входящие','false'),
-       (2,'Купить корм для кота', 'null','Домашние дела','false'),
-       (3,'Заказать пиццу', 'null','Домашние дела','false');
+VALUES (1,'Собеседование в IT компании', '01.12.2019',3,'0'),
+       (2,'Выполнить тестовое задание', '25.12.2019',3,'0'),
+       (3,'Сделать задание первогораздела', '21.12.2019',2,'1'),
+       (1,'Встреча с другом', '22.12.2019',1,'0'),
+       (2,'Купить корм для кота', 'null',4,'0'),
+       (3,'Заказать пиццу', 'null',4,'0');
 
 SELECT id,
       nickname,
@@ -53,15 +54,22 @@ SELECT id,
 FROM users;
 
 
-SELECT id,
+SELECT
        title
 FROM categories;
 
 
-SELECT id,
-       user_id,
-       date_create,
-       category_id,
-       title,
-       is_done
+SELECT
+       title
 FROM posts;
+
+SELECT * FROM posts WHERE user_id =1;
+SELECT * FROM posts WHERE category_id=3;
+
+UPDATE posts
+SET is_done='1'
+WHERE user_id=1;
+
+UPDATE posts
+SET title='Разговоры о важном'
+WHERE id=1;
