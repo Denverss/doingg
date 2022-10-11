@@ -1,8 +1,11 @@
 <?php
 
-require_once ('templates/helpers.php');
+require_once('templates/helpers.php');
 
 $show_complete_tasks = rand(0, 1);
+$title="Дела в порядке";
+$data=["data"];
+
 $categories=["Входящие",
     "Учеба",
     "Работа",
@@ -50,11 +53,11 @@ $posts = [
     ],
 ];
 
-$title="Дела в порядке";
+
 
 $content=include_template('main.php',['show_complete_tasks'=>$show_complete_tasks, 'categories'=>$categories, 'posts'=>$posts]);
 
-$page=include_template('layout.php', ['content'=>$content, 'title'=>$title, ]);
-print($page);
+$page=include_template('Layout.php', [ 'data'=>$data, 'title'=>$title,'show_complete_tasks'=>$show_complete_tasks, 'categories'=>$categories, 'posts'=>$posts]);
+echo $page;
 
 ?>

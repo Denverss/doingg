@@ -1,4 +1,6 @@
-
+<?php
+$content=include_template('main.php',['show_complete_tasks'=>$show_complete_tasks, 'categories'=>$categories, 'posts'=>$posts]);
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -50,9 +52,7 @@
                 <a class="button button--transparent button--plus content__side-button"
                     href="pages/form-project.html" target="project_add">Добавить проект</a>
             </section>
-            <main class="content__main">
-            <?= $content ?>
-            </main>
+             <?= $content ?>
         </div>
     </div>
 </div>

@@ -1,21 +1,3 @@
-<div class="content">
-    <section class="content__side">
-        <h2 class="content__side-heading">Проекты</h2>
-
-        <nav class="main-navigation">
-            <ul class="main-navigation__list">
-                <?php foreach ($categories as $category):?>
-                    <li class="main-navigation__list-item">
-                        <a class="main-navigation__list-item-link" href="#"><?= $category ?></a>
-                        <span class="main-navigation__list-item-count"><?= count_category($posts,$category) ?></span>
-                    </li>
-                <?php endforeach;?>
-            </ul>
-        </nav>
-
-        <a class="button button--transparent button--plus content__side-button"
-            href="pages/form-project.html" target="project_add">Добавить проект</a>
-     </section>
 
     <main class="content__main">
         <h2 class="content__main-heading">Список задач</h2>
@@ -35,7 +17,7 @@
             </nav>
 
             <label class="checkbox">
-                <!--добавить сюда атрибут "checked", если переменная $show_complete_tasks равна единице-->
+
                 <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if($show_complete_tasks == 1):?> checked   <?php endif; ?>>
                 <span class="checkbox__text">Показывать выполненные</span>
             </label>
@@ -46,7 +28,7 @@
                 <?php if ($show_complete_tasks === 0 && $post["is_done"]): ?>
                      <?php continue; ?>
                  <?php else: ?>
-                     <tr class="tasks__item task <?= ($post["is_done"]) ? 'task--completed' : ''?>">
+                     <tr class="tasks__item task<?php if (getTime($post['data']) <= 24):?> <?php endif;?> <?php if($post["is_done"] === true):?>post--completed <?php endif; ?> <?= ($post["is_done"]) ? 'task--completed' : ''?>">
                             <td class="task__select">
                              <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
@@ -62,7 +44,6 @@
                     </tr>
                 <?php endif; ?>
             <?php endforeach; ?>
-            <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
         </table>
     </main>
  </div>

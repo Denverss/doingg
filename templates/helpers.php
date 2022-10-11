@@ -90,8 +90,8 @@ function include_template($name, array $data = []) {
 }
 
 /**
- * 
- * 
+ *
+ *
  */
 function count_category($post_list,$category)
 {
@@ -105,4 +105,11 @@ function count_category($post_list,$category)
 
     return $result;
 }
-
+function getTime($fe_date)
+{
+    date_default_timezone_set("Europe/Moscow");
+    $timestamp = strtotime($fe_date) - time();
+    $hours = floor($timestamp / 3600);
+    $min = floor(($timestamp % 3600) / 60);
+    return $hours;
+}
