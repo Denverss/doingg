@@ -1,4 +1,4 @@
-<?php ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
 <h1 class="visually-hidden">Дела</h1>
 
 <div class="page-wrapper">
@@ -33,9 +32,28 @@
                 </div>
             </div>
         </header>
+        <div class="content">
+            <section class="content__side">
+                <h2 class="content__side-heading">Проекты</h2>
 
-        <div><?= $content ?></div>
+                <nav class="main-navigation">
+                    <ul class="main-navigation__list">
+                        <?php foreach ($categories as $category):?>
+                            <li class="main-navigation__list-item">
+                                <a class="main-navigation__list-item-link" href="#"><?= $category ?></a>
+                                <span class="main-navigation__list-item-count"><?= count_category($posts,$category) ?></span>
+                            </li>
+                        <?php endforeach;?>
+                    </ul>
+                </nav>
 
+                <a class="button button--transparent button--plus content__side-button"
+                    href="pages/form-project.html" target="project_add">Добавить проект</a>
+            </section>
+            <main class="content__main">
+            <?= $content ?>
+            </main>
+        </div>
     </div>
 </div>
 
@@ -102,3 +120,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+

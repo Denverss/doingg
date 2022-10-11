@@ -89,4 +89,20 @@ function include_template($name, array $data = []) {
     return $result;
 }
 
+/**
+ * 
+ * 
+ */
+function count_category($post_list,$category)
+{
+
+    $result = 0;
+    foreach ($post_list as $post)
+        if ($post["categories"] === $category) {
+            $result = $result + 1;
+        }
+
+
+    return $result;
+}
 

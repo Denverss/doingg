@@ -1,4 +1,7 @@
 <?php
+
+require_once ('templates/helpers.php');
+
 $show_complete_tasks = rand(0, 1);
 $categories=["Входящие",
     "Учеба",
@@ -47,22 +50,11 @@ $posts = [
     ],
 ];
 
-function count_category($post_list,$category)
-{
+$title="Дела в порядке";
 
-    $result = 0;
-    foreach ($post_list as $post)
-        if ($post["categories"] === $category) {
-            $result = $result + 1;
-        }
+$content=include_template('main.php',['show_complete_tasks'=>$show_complete_tasks, 'categories'=>$categories, 'posts'=>$posts]);
 
+$page=include_template('layout.php', ['content'=>$content, 'title'=>$title, ]);
+print($page);
 
-    return $result;
-}
-require_once ('helpers .php');
-
-$Content = include_template('layout.php', ['categories' => $categories, 'posts' => $posts , 'show_complete_tasks' => $show_complete_tasks]);
-$page = include_template('layout.php', ['content'=> $Content, 'title' =>'Дела в порядке', 'categories' => $categories, 'posts' => $posts , 'show_complete_tasks' => $show_complete_tasks]);
-print $page;
-
-USE Doing;
+?>
