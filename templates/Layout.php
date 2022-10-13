@@ -1,5 +1,5 @@
 <?php
-$content=include_template('main.php',['show_complete_tasks'=>$show_complete_tasks, 'categories'=>$categories, 'posts'=>$posts]);
+$content=include_template('main.php',['show_complete_tasks'=>$show_complete_tasks, 'projects'=>$projects, 'tasks'=>$tasks]);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -27,7 +27,7 @@ $content=include_template('main.php',['show_complete_tasks'=>$show_complete_task
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
-                        <p>Константин</p>
+                        <p></p>
 
                         <a href="#">Выйти</a>
                     </div>
@@ -40,10 +40,10 @@ $content=include_template('main.php',['show_complete_tasks'=>$show_complete_task
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($categories as $category):?>
+                        <?php foreach ($projects as $project):?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?= $category ?></a>
-                                <span class="main-navigation__list-item-count"><?= count_category($posts,$category) ?></span>
+                                <a class="main-navigation__list-item-link" href="#"><?= $project['title'] ?></a>
+                                <span class="main-navigation__list-item-count"><?= count_project($tasks,$project) ?></span>
                             </li>
                         <?php endforeach;?>
                     </ul>

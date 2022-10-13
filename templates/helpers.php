@@ -93,15 +93,14 @@ function include_template($name, array $data = []) {
  *
  *
  */
-function count_category($post_list,$category)
+function count_project($tasks,$project)
 {
 
     $result = 0;
-    foreach ($post_list as $post)
-        if ($post["categories"] === $category) {
+    foreach ($tasks as $task)
+        if ($task["project_id"] === $project["id"]) {
             $result = $result + 1;
         }
-
 
     return $result;
 }

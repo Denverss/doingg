@@ -10,42 +10,43 @@ CREATE TABLE users (
 );
 
 
-CREATE TABLE categories (
+CREATE TABLE projects (
                           id	    BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                           title	VARCHAR(255) NOT NULL UNIQUE
+
 );
 
-CREATE TABLE posts (
+CREATE TABLE tasks (
                      id			BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                      user_id		BIGINT NOT NULL,
                      date_create DATETIME NOT NULL,
-                     category_id	BIGINT NOT NULL,
+                     project_id	BIGINT NOT NULL,
                      title		VARCHAR(255) NOT NULL,
                      is_done VARCHAR(1) ,
                      FOREIGN KEY(user_id) REFERENCES users(id),
-                      FOREIGN KEY(category_id) REFERENCES  categories(id)
+                      FOREIGN KEY(project_id) REFERENCES  projects(id)
 
 );
 
 
-INSERT INTO categories(title)
+INSERT INTO projects(title)
 VALUES ('Входящие'),
        ('Учеба'),
        ('Работа'),
        ('Домашние дела'),
        ('Авто');
-INSERT INTO users( nickname, email, password)
-VALUES ('Andrew', 'my@mail.ru', '$2y$10$azTPD8NrWOdSm5GIrE5J/OE9Usc5JB4rq4CpR4xYv7Yc2Yb01ODXW'),
-('Danil', 'denbach@mail.ru','123bach'),
-('Oli','anonymus@mail.ru','olyaSyperstar');
+INSERT INTO users(id, nickname, email, password)
+VALUES (1,'Andrew', 'my@mail.ru', '$2y$10$azTPD8NrWOdSm5GIrE5J/OE9Usc5JB4rq4CpR4xYv7Yc2Yb01ODXW'),
+(2,'Danil', 'denbach@mail.ru','123bach'),
+(3,'Oli','anonymus@mail.ru','olyaSyperstar');
 
-INSERT INTO posts(user_id, title,date_create,category_id,is_done)
+INSERT INTO tasks(user_id, title,date_create,project_id,is_done)
 VALUES (1,'Собеседование в IT компании', '01.12.2019',3,'0'),
        (2,'Выполнить тестовое задание', '25.12.2019',3,'0'),
-       (3,'Сделать задание первогораздела', '21.12.2019',2,'1'),
+       (3,'Сделать задание первого раздела', '21.12.2019',2,'1'),
        (1,'Встреча с другом', '22.12.2019',1,'0'),
-       (2,'Купить корм для кота', 'null',4,'0'),
-       (3,'Заказать пиццу', 'null',4,'0');
+       (2,'Купить корм для кота', '20.10.2022',4,'0'),
+       (3,'Заказать пиццу', '15.10.2022',4,'0');
 
 SELECT id,
       nickname,
@@ -56,20 +57,21 @@ FROM users;
 
 SELECT
        title
-FROM categories;
+FROM projects;
 
 
 SELECT
        title
-FROM posts;
-
-SELECT * FROM posts WHERE user_id =1;
-SELECT * FROM posts WHERE category_id=3;
-
-UPDATE posts
+FROM tasks;
+/**получить список из всех проектов для одного пользователя;*/
+SELECT * FROM tasks WHERE user_id =1;
+/**получить список из всех задач для одного проекта;*/
+SELECT * FROM tasks WHERE project_id=3;
+/**пометить задачу как выполненную;*/
+UPDATE tasks
 SET is_done='1'
 WHERE user_id=1;
-
-UPDATE posts
+/** обновить название задачи по её идентификатору.*/
+UPDATE tasks
 SET title='Разговоры о важном'
 WHERE id=1;

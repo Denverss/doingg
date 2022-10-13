@@ -24,22 +24,22 @@
          </div>
 
         <table class="tasks">
-            <?php foreach ($posts as $post): ?>
-                <?php if ($show_complete_tasks === 0 && $post["is_done"]): ?>
+            <?php foreach ($tasks as $task): ?>
+                <?php if ($show_complete_tasks === 0 && $task["is_done"]==='1'): ?>
                      <?php continue; ?>
                  <?php else: ?>
-                     <tr class="tasks__item task<?php if (getTime($post['data']) <= 24):?> <?php endif;?> <?php if($post["is_done"] === true):?>task--important <?php endif; ?> <?= ($post["is_done"]) ? 'task--completed' : ''?>">
+                     <tr class="tasks__item task<?php if (getTime($task['date_create']) <= 24):?> <?php endif;?> <?php if($task["is_done"] === 1):?>task--important <?php endif; ?> <?= ($task["is_done"])==='1' ? 'task--completed' : '';?>">
                             <td class="task__select">
                              <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text"><?= $post["title"]?></span>
+                                <span class="checkbox__text"><?= $task["title"]?></span>
                             </label>
                          </td>
                         <td class="task__file">
                             <a class="download-link" href="#">Home.psd</a>
                         </td>
 
-                        <td class="task__date"><?= $post["data"] ?></td>
+                        <td class="task__date"><?= $task["date_create"] ?></td>
 
                     </tr>
                 <?php endif; ?>

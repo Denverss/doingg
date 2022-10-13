@@ -1,69 +1,27 @@
 <?php
 
 require_once('templates/helpers.php');
+require_once ('core/init.php');
+
+/**
+ * @var PDO $con
+ */
 
 $show_complete_tasks = rand(0, 1);
 $title="Дела в порядке";
-$data=["data"];
-
-$categories=["Входящие",
-    "Учеба",
-    "Работа",
-    "Домашние дела",
-    "Авто"];
-$posts = [
-    [
-        "title"=>"Собеседование
-        в IT компании",
-        "data"=>"01.12.2019",
-        "categories"=>"Работа",
-        "is_done"=>false
-    ],
-    [
-        "title"=>"Выполнить тестовое
-        задание",
-        "data"=>"25.12.2019",
-        "categories"=>"Работа",
-        "is_done"=>false
-    ],
-    [
-        "title"=>"Сделать задание первого
-        раздела",
-        "data"=>"21.12.2019",
-        "categories"=>"Учеба",
-        "is_done"=>true
-    ],
-    [
-        "title"=>"Встреча с другом",
-        "data"=>"22.12.2019",
-        "categories"=>"Входящие",
-        "is_done"=>false
-    ],
-    [
-        "title"=>"Купить корм для кота",
-        "data"=>"null",
-        "categories"=>"Домашние дела",
-        "is_done"=>false
-    ],
-    [
-        "title"=>"Заказать пиццу",
-        "data"=>"null",
-        "categories"=>"Домашние дела",
-        "is_done"=>false
-    ],
-];
 
 
 
-$content=include_template('main.php',['show_complete_tasks'=>$show_complete_tasks, 'categories'=>$categories, 'posts'=>$posts]);
+$projectsObject= $con->query('SELECT * from projects');
+$projects= $projectsObject->fetchAll();
+$tasksObject= $con->query('SELECT * from tasks');
+$tasks = $tasksObject->fetchAll();
 
-$page=include_template('Layout.php', [ 'data'=>$data, 'title'=>$title,'show_complete_tasks'=>$show_complete_tasks, 'categories'=>$categories, 'posts'=>$posts]);
+$content=include_template('main.php',['show_complete_tasks'=>$show_complete_tasks, 'projects'=>$projects, 'tasks'=>$tasks]);
+
+$page=include_template('Layout.php', [ 'title'=>$title,'show_complete_tasks'=>$show_complete_tasks, 'projects'=>$projects, 'tasks'=>$tasks]);
 echo $page;
 
-$host = 'localhost';
-$dbName = 'doing';
-$userName= 'root';
-$password= '';
 
 
 ?>
