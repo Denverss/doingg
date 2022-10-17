@@ -27,7 +27,7 @@ $content=include_template('main.php',['show_complete_tasks'=>$show_complete_task
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
-                        <p></p>
+                        <p>Олег</p>
 
                         <a href="#">Выйти</a>
                     </div>
@@ -50,7 +50,7 @@ $content=include_template('main.php',['show_complete_tasks'=>$show_complete_task
                 </nav>
 
                 <a class="button button--transparent button--plus content__side-button"
-                    href="pages/form-project.html" target="project_add">Добавить проект</a>
+                    href="templates/pages/form-project.html" target="project_add">Добавить проект</a>
             </section>
              <?= $content ?>
         </div>

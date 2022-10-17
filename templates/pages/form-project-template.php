@@ -1,5 +1,5 @@
 
- <h2 class="content__main-heading">Добавление проекта</h2>
+<h2 class="content__main-heading">Добавление проекта</h2>
 
   <form class="form"  action="index.html" method="post" autocomplete="off">
     <div class="form__row">

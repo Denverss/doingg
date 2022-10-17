@@ -22,7 +22,7 @@ $projects= $projectsObject->fetchAll();
 $tasksObject= $con->query('SELECT * from tasks');
 $tasks = $tasksObject->fetchAll();
 
-$content=include_template('main.php',['show_complete_tasks'=>$show_complete_tasks, 'projects'=>$projects, 'tasks'=>$tasks,'task'=>$task]);
+$content=include_template('main.php',['tasksid'=>$tasksid ]);
 
 $page=include_template('Layout.php', [ 'title'=>$title,'show_complete_tasks'=>$show_complete_tasks, 'projects'=>$projects, 'tasks'=>$tasks]);
 echo $page;
