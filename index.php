@@ -3,6 +3,7 @@
 require_once('templates/helpers.php');
 require_once ('core/init.php');
 
+$isAuth=(bool) rand(0,1);
 /**
  * @var PDO $con
  */

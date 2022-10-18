@@ -93,10 +93,10 @@ function include_template($name, array $data = []) {
  *
  *
  */
-function count_project ($tasks_mass, $name_mass){
+function count_project ($tasks, $nickname){
     $i=0;
-    foreach ($tasks_mass as $task){
-        if($task["project"]===$name_mass){
+    foreach ($tasks as $task){
+        if($task["project"]===$nickname){
             $i++;
         }
         else{
@@ -118,6 +118,7 @@ function getAllTasks($con) {
 	t.title,
     t.date_create,
     t.is_done,
+    t.file,
     p.title as project
 	FROM `tasks` t JOIN projects p ON t.project_id = p.id');
     return $tasksObject->fetchAll();
@@ -127,6 +128,7 @@ function getTasksByProjectId($con, $id) {
 	t.title,
     t.date_create,
     t.is_done,
+    t.file,
     p.title as project
 	FROM `tasks` t JOIN projects p ON t.project_id = p.id
     WHERE t.project_id = ?');
@@ -134,4 +136,25 @@ function getTasksByProjectId($con, $id) {
     return $stmt->fetchAll();
 }
 
+function validateProject(int $id,array $allowed_list){
+    if(!in_array($id,$allowed_list)){
+        return "Указано несуществующее название проекта";
+    }
+}
+function validateImage(){
+    if (!empty($_FILES['photo']['name'])){
+        $finfo=finfo_open(FILEINFO_MIME_TYPE);
+        $tmp_name=$_FILES['photo']['tmp_name'];
+        $file_type=finfo_file($finfo,$tmp_name);
+        if($file_type !=="image/jpeg" && $file_type !== "image/png" && $file_type !== "image/png"){
+            return false;
+        }
+        return true;
+    }   else{
+        return false;
+    }
+}
+function validateFilled(){
+
+}
 

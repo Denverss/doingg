@@ -7,7 +7,7 @@
                 <?php foreach ($projects as $project):?>
                     <li class="main-navigation__list-item">
                         <a class="main-navigation__list-item-link" href="index.php?id=<?= $project['id']?>"><?php echo ($project['title']) ?></a>
-                        <span class="main-navigation__list-item-count"><?php echo(count_project($tasks,$project['title'])) ?></span>
+                        <span class="main-navigation__list-item-count"><?php echo(count_project($all_tasks,$project['title'])) ?></span>
                     </li>
                 <?php endforeach;?>
             </ul>
@@ -45,7 +45,7 @@
                 <?php if ($show_complete_tasks === 0 && $task["is_done"]==='1'): ?>
                      <?php continue; ?>
                  <?php else: ?>
-                     <tr class="tasks__item task<?php if (getTime($task['date_create']) <= 24):?> <?php endif;?> <?php if($task["is_done"] === 1):?>task--important <?php endif; ?> <?= ($task["is_done"])==='1' ? 'task--completed' : '';?>">
+                     <tr class="tasks__item task<?php if (getTime($task['date_create']) <= 24):?> task--important<?php endif;?>  <?= ($task["is_done"])==='1' ? 'task--completed' : '';?>">
                             <td class="task__select">
                              <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
@@ -53,7 +53,7 @@
                             </label>
                          </td>
                         <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
+                            <a class="download-link" href="#"><?=$task['file']?></a>
                         </td>
 
                         <td class="task__date"><?= $task["date_create"] ?></td>

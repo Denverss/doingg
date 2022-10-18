@@ -14,6 +14,7 @@ CREATE TABLE projects (
                           id	    BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                           title	VARCHAR(255) NOT NULL UNIQUE
 
+
 );
 
 CREATE TABLE tasks (
@@ -22,6 +23,7 @@ CREATE TABLE tasks (
                      date_create DATETIME NOT NULL,
                      project_id	BIGINT NOT NULL,
                      title		VARCHAR(255) NOT NULL,
+                     file  VARCHAR(255) NOT NULL,
                      is_done VARCHAR(1) ,
                      FOREIGN KEY(user_id) REFERENCES users(id),
                       FOREIGN KEY(project_id) REFERENCES  projects(id)
@@ -40,13 +42,13 @@ VALUES (1,'Andrew', 'my@mail.ru', '$2y$10$azTPD8NrWOdSm5GIrE5J/OE9Usc5JB4rq4CpR4
 (2,'Danil', 'denbach@mail.ru','123bach'),
 (3,'Oli','anonymus@mail.ru','olyaSyperstar');
 
-INSERT INTO tasks(user_id, title,date_create,project_id,is_done)
-VALUES (1,'Собеседование в IT компании', '01.12.2019',3,'0'),
-       (2,'Выполнить тестовое задание', '25.12.2019',3,'0'),
-       (3,'Сделать задание первого раздела', '21.12.2019',2,'1'),
-       (1,'Встреча с другом', '22.12.2019',1,'0'),
-       (2,'Купить корм для кота', '20.10.2022',4,'0'),
-       (3,'Заказать пиццу', '15.10.2022',4,'0');
+INSERT INTO tasks(user_id, title,date_create,project_id,is_done, file)
+VALUES (1,'Собеседование в IT компании', '01.12.2019',3,'0','Link'),
+       (2,'Выполнить тестовое задание', '25.12.2019',3,'0','File'),
+       (3,'Сделать задание первого раздела', '21.12.2019',2,'1','File'),
+       (1,'Встреча с другом', '22.12.2019',1,'0','File'),
+       (2,'Купить корм для кота', '20.10.2022',4,'0','File'),
+       (3,'Заказать пиццу', '15.10.2022',4,'0','Link');
 
 SELECT id,
       nickname,

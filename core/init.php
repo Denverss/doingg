@@ -20,3 +20,4 @@ try{
 } catch(PDOException $e) {
     die("Подключение к серверу MySQL не удалось - {$e->getMessage()}");
 }
+
