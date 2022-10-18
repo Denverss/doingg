@@ -116,7 +116,7 @@ function getTime($fe_date)
 function getAllTasks($con) {
     $tasksObject =$con->query('SELECT
 	t.title,
-    t.date_create,
+    t.date_end,
     t.is_done,
     t.file,
     p.title as project_name
@@ -126,7 +126,7 @@ function getAllTasks($con) {
 function getTasksByProjectId($con, $id) {
     $stmt = $con->prepare('SELECT
 	t.title,
-    t.date_create,
+    t.date_end,
     t.is_done,
     t.file,
     p.title as project_name

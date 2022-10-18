@@ -24,10 +24,10 @@
 
         <table class="tasks">
             <?php foreach ($tasks as $task): ?>
-                <?php if ($show_complete_tasks === 0 && $task["is_done"]==='1'): ?>
+                <?php if ($show_complete_tasks === 0 && $task["is_done"]=== 1): ?>
                      <?php continue; ?>
                  <?php else: ?>
-                     <tr class="tasks__item task<?php if (getTime($task['date_create']) <= 24):?> task--important<?php endif;?>  <?= ($task["is_done"])==='1' ? 'task--completed' : '';?>">
+                     <tr class="tasks__item task<?php if (getTime($task['date_end']) <= 24):?> task--important<?php endif;?>  <?= ($task["is_done"])=== 1 ? 'task--completed' : '';?>">
                             <td class="task__select">
                              <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
@@ -38,7 +38,7 @@
                             <a class="download-link" href="#"><?=$task['file']?></a>
                         </td>
 
-                        <td class="task__date"><?= $task["date_create"] ?></td>
+                        <td class="task__date"><?= $task["date_end"] ?></td>
 
                     </tr>
                 <?php endif; ?>
