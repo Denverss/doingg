@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
     <meta charset="UTF-8">
-    <title><?= $title ?></title>
+    <title>Дела в порядке</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
@@ -21,18 +20,41 @@
             </a>
 
             <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="template/add.php">Добавить задачу</a>
+                <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
-                        <p>Олег</p>
+                        <p>Константин</p>
 
                         <a href="#">Выйти</a>
                     </div>
                 </div>
             </div>
         </header>
-             <?= $content ?>
+
+        <div class="content">
+            <section class="content__side">
+                <h2 class="content__side-heading">Проекты</h2>
+
+                <nav class="main-navigation">
+                    <ul class="main-navigation__list">
+                        <?php foreach ($projects as $project):?>
+                            <li class="main-navigation__list-item">
+                                <a class="main-navigation__list-item-link" href="index.php?id=<?= $project['id']?>"><?php echo ($project['title']) ?></a>
+                                <span class="main-navigation__list-item-count"><?php echo(count_project($all_tasks,$project['title'])) ?></span>
+                            </li>
+                        <?php endforeach;?>
+                    </ul>
+                </nav>
+
+                <a class="button button--transparent button--plus content__side-button"
+                   href="pages/form-project.html" target="project_add">Добавить проект</a>
+            </section>
+
+            <?= $content; ?>
+        </div>
+    </div>
+</div>
 
 <footer class="main-footer">
     <div class="container">
@@ -93,8 +115,7 @@
     </div>
 </footer>
 
-<script src="flatpickr.js"></script>
-<script src="script.js"></script>
+<script src="js/flatpickr.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
-

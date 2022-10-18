@@ -93,10 +93,10 @@ function include_template($name, array $data = []) {
  *
  *
  */
-function count_project ($tasks, $nickname){
+function count_project ($tasks, $project_name){
     $i=0;
     foreach ($tasks as $task){
-        if($task["project"]===$nickname){
+        if($task["project_name"]===$project_name){
             $i++;
         }
         else{
@@ -119,7 +119,7 @@ function getAllTasks($con) {
     t.date_create,
     t.is_done,
     t.file,
-    p.title as project
+    p.title as project_name
 	FROM `tasks` t JOIN projects p ON t.project_id = p.id');
     return $tasksObject->fetchAll();
 }
@@ -129,7 +129,7 @@ function getTasksByProjectId($con, $id) {
     t.date_create,
     t.is_done,
     t.file,
-    p.title as project
+    p.title as project_name
 	FROM `tasks` t JOIN projects p ON t.project_id = p.id
     WHERE t.project_id = ?');
     $stmt->execute([$id]);

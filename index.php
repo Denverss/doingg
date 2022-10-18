@@ -1,19 +1,16 @@
 <?php
 
-require_once('templates/helpers.php');
+require_once('core/helpers.php');
 require_once ('core/init.php');
-
-$isAuth=(bool) rand(0,1);
 /**
  * @var PDO $con
  */
 
-$show_complete_tasks = rand(0, 1);
-$title="Дела в порядке";
-$all_tasks = getAllTasks($con);
 
-$projectsObject= $con->query('SELECT * from projects');
-$projects= $projectsObject->fetchAll();
+$title="Дела в порядке";
+
+
+
 if(isset($_GET['id'])){
     $id=intval($_GET['id']??null);
     $tasks=getTasksByProjectId($con,$id);
@@ -22,11 +19,12 @@ else{
     $tasks=$all_tasks;
 }
 
-$indexContent = include_template('main.php', compact('show_complete_tasks', 'projects', 'tasks', 'all_tasks'));
+$indexContent = include_template('pages/main-template.php', compact('show_complete_tasks', 'tasks'));
 $page = include_template('layout.php' , [
     'content' => $indexContent,
     'title'=> $title,
-    'projects'=>$projects
+    'projects'=>$projects,
+    'all_tasks' => $all_tasks
 ]);
 print($page);
 

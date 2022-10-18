@@ -21,3 +21,11 @@ try{
     die("Подключение к серверу MySQL не удалось - {$e->getMessage()}");
 }
 
+$projectsObject= $con->query('SELECT * from projects');
+$projects = $projectsObject->fetchAll();
+
+$show_complete_tasks = rand(0, 1);
+
+$isAuth=(bool) rand(0,1);
+
+$all_tasks = getAllTasks($con);
