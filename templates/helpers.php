@@ -93,16 +93,17 @@ function include_template($name, array $data = []) {
  *
  *
  */
-function count_project($tasks,$project)
-{
-
-    $result = 0;
-    foreach ($tasks as $task)
-        if ($task["project_id"] === $project["id"]) {
-            $result = $result + 1;
+function count_project ($tasks_mass, $name_mass){
+    $i=0;
+    foreach ($tasks_mass as $task){
+        if($task["project"]===$name_mass){
+            $i++;
         }
-
-    return $result;
+        else{
+            continue;
+        }
+    }
+    return $i;
 }
 function getTime($fe_date)
 {
@@ -112,3 +113,25 @@ function getTime($fe_date)
     $min = floor(($timestamp % 3600) / 60);
     return $hours;
 }
+function getAllTasks($con) {
+    $tasksObject =$con->query('SELECT
+	t.title,
+    t.date_create,
+    t.is_done,
+    p.title as project
+	FROM `tasks` t JOIN projects p ON t.project_id = p.id');
+    return $tasksObject->fetchAll();
+}
+function getTasksByProjectId($con, $id) {
+    $stmt = $con->prepare('SELECT
+	t.title,
+    t.date_create,
+    t.is_done,
+    p.title as project
+	FROM `tasks` t JOIN projects p ON t.project_id = p.id
+    WHERE t.project_id = ?');
+    $stmt->execute([$id]);
+    return $stmt->fetchAll();
+}
+
+
