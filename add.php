@@ -21,15 +21,15 @@ $page = include_template('layout.php',[
 
 print ($page);
 
-
-$errors=[];
+$required_fields = ['title', 'project_id', 'date_end', 'file'];
+$errors=[''];
 $projects_ids=array_column($projects,'id');
 $post=$_POST;
 $rules= [
     'project_id' =>function($value) use ($projects_ids){
         return validateProject($value,$projects_ids);
     },
-    'title'=>function(){
+    'title'=>function() {
         return validateFilled('title');
     },
     'date_end'=>function(){
@@ -38,12 +38,19 @@ $rules= [
 
 
 ];
-
-$file_rule = function (){
-    if(!validateImage()){
-        return "Загрузите картинку в формате jpg,jpeg или png";
+if ($_POST == empty($field) && $_FILES == empty($field)) {
+    foreach ($required_fields as $field) {
+        if (empty($_POST[$field]) && empty($_FILES[$field])) {
+            $errors[$field] = "Не введено название";
+        }
     }
-};
+}
+
+//$file_rule = function (){
+//    if(!validateImage()){
+//        return "Загрузите картинку в формате jpg,jpeg или png";
+//    }
+//};
 
 if ($_SERVER['REQUEST_METHOD']=='POST'){
     foreach ($post as $key =>$value){
