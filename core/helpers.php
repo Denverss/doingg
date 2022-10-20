@@ -141,28 +141,17 @@ function validateProject(int $id,array $allowed_list){
         return "Указано несуществующее название проекта";
     }
 }
-function validateImage(){
-    if (!empty($_FILES['photo']['name'])){
-        $finfo=finfo_open(FILEINFO_MIME_TYPE);
-        $tmp_name=$_FILES['photo']['tmp_name'];
-        $file_type=finfo_file($finfo,$tmp_name);
-        if($file_type !=="image/jpeg" && $file_type !=="image/png" && $file_type !=="image/jpg"){
-            return false;
-        }
-        return true;
-    }   else{
-        return "Добавьте картинку";
+
+function validateFilled($text){
+    if(empty($text)){
+        return "Заполните это поле";
     }
+    return null;
 }
-function validateFilled(){
-    if(isset($title)){
-        return "Указано невозможное название";
+function validateDateEnd($date){
+    //тут должна быть ещё одна проверка на то, что дата больше или равна текущей дате
+    if(!is_date_valid($date)){
+        return "Некорректная дата";
     }
 
 }
-//function validateDateEnd(){
- //   if(){
- //       return "Дата сдачи не может быть раньше начала";
- //   }
-//
-//}
