@@ -149,9 +149,13 @@ function validateFilled($text){
     return null;
 }
 function validateDateEnd($date){
-    //тут должна быть ещё одна проверка на то, что дата больше или равна текущей дате
     if(!is_date_valid($date)){
         return "Некорректная дата";
     }
 
+}
+function validateFuturedate($date){
+    if(strtotime($date) < strtotime("now")){
+        return "Некорректная дата";
+    }
 }

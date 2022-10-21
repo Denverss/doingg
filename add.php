@@ -17,7 +17,14 @@ $rules= [
         return validateFilled($title);
     },
     'due_date'=>function($date){
-        return validateDateEnd($date);
+        $errordateend = validateDateEnd($date);
+        if ($errordateend){
+            return $errordateend;
+        }
+       $errordate = validateFuturedate($date);
+       if ($errordate){
+           return $errordate;
+       }
     },
 ];
 
@@ -32,8 +39,10 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     $errors = array_filter($errors);
 }
 
+var_dump($errors);
+
 if ($_SERVER['REQUEST_METHOD']=='POST' && empty($errors)) {
-    //добавить данные в БД
+    $inf =$content->prepare('INSERT INTO post SET title=:title, project=:id, due_date=:date, file=:file');
     var_dump(1);
 }
 
