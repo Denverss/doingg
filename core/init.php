@@ -1,22 +1,16 @@
 <?php
-$host = 'localhost';
-$dbName = 'doing';
-$userName= 'root';
-$password= '';
 
-$charset = 'utf8mb4';
-$collate = 'utf8mb4_0900_ai_ci';
-$driver = 'mysql';
+$db = (require_once('core/config.php'))['db'];
 
-$dsn = "{$driver}:host={$host};dbname={$dbName};charset={$charset}";
+$dsn = "{$db['driver']}:host={$db['host']};dbname={$db['dbName']};charset={$db['charset']}";
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES {$charset} COLLATE {$collate}"
+    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES {$db['charset']} COLLATE {$db['collate']}"
 ];
 
 try{
-    $con = new PDO($dsn, $userName, $password, $options );
+    $con = new PDO($dsn, $db['userName'], $db['password'], $options );
 } catch(PDOException $e) {
     die("Подключение к серверу MySQL не удалось - {$e->getMessage()}");
 }

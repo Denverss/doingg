@@ -42,8 +42,21 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
 var_dump($errors);
 
 if ($_SERVER['REQUEST_METHOD']=='POST' && empty($errors)) {
-    $inf =$content->prepare('INSERT INTO post SET title=:title, project=:id, due_date=:date, file=:file');
+    if(!empty($_FILES['file']['name'])) {
+        $file_name = $_FILES['file']['name'];
+        $uniq_url = uniqid();
+        $task['file'] = 'uploads/' . $uniq_url . $file_name;
+        move_uploaded_file($_FILES['file']['tmp_name'], $task['file']);
+    }
+    else {
+        $task['file'] = null;
+    }
+    $task['user_id'] = 1;
+    $inf =$con->prepare('INSERT INTO tasks SET title=:title, project_id=:project, date_end=:due_date, file=:file, user_id=:user_id');
+    $inf->execute($task);
     var_dump(1);
+    header("Location: index.php");
+
 }
 
 
