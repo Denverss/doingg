@@ -21,6 +21,7 @@ else{
 
 $indexContent = include_template('pages/main-template.php', compact('show_complete_tasks', 'tasks'));
 $page = include_template('layout.php' , [
+    'is_auth'=>$is_auth,
     'content' => $indexContent,
     'title'=> $title,
     'projects'=>$projects,
