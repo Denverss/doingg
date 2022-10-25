@@ -20,6 +20,13 @@ $projects = $projectsObject->fetchAll();
 
 $show_complete_tasks = rand(0, 1);
 
-$isAuth=(bool) rand(0,1);
-
 $all_tasks = getAllTasks($con);
+
+session_start();
+$is_auth = isset($_SESSION['user_id']);
+if ($is_auth=true){
+    $user_name = $_SESSION['user_name'];
+}
+else{
+    $user_name = '';
+}

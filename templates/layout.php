@@ -9,31 +9,38 @@
     <link rel="stylesheet" href="css/flatpickr.min.css">
 </head>
 
-<body>
+<body class="body-background">
 <h1 class="visually-hidden">Дела</h1>
 
 <div class="page-wrapper">
-    <div class="container container--with-sidebar">
-        <header class="main-header">
-            <a href="/">
-                <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
-            </a>
+        <div class="container">
+            <header class="main-header">
+                <a href="/">
+                  <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
+             </a>
+                <div class="main-header__side">
+                    <?php if ($is_auth==true): ?>
+                        <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
+                        <div class="main-header__side-item user-menu">
+                        <div class="user-menu__data">
+                            <p><?= getPostVal('name')?></p>
+                            <a href="guest.php">Выйти</a>
+                        </div>
 
-            <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
-
-                <div class="main-header__side-item user-menu">
-                    <div class="user-menu__data">
-                        <p></p>
-
-                        <a href="guest.php">Выйти</a>
-                    </div>
-                </div>
+                    <?php else: ?>
+                        <div class="main-header__side-item user-menu">
+                        <div class="user-menu__data">
+                        <a href="authorization.php">Авторизация</a>
+                        <a href="register.php">Регистрация</a>
+                        </div>
+                    <?php endif; ?>
+                 </div>
             </div>
         </header>
 
         <div class="content">
             <section class="content__side">
+                <?php if($is_auth==true):?>
                 <h2 class="content__side-heading">Проекты</h2>
 
                 <nav class="main-navigation">
@@ -44,11 +51,15 @@
                                 <span class="main-navigation__list-item-count"><?php echo(count_project($all_tasks,$project['title'])) ?></span>
                             </li>
                         <?php endforeach;?>
+                       
                     </ul>
                 </nav>
 
                 <a class="button button--transparent button--plus content__side-button"
                    href="pages/form-project-template.php" target="project_add">Добавить проект</a>
+                <? else:?>
+                    <h2 class="content__side-heading">Проекты</h2>
+                <?php endif;?>
             </section>
 
             <?= $content; ?>
