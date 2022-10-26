@@ -172,3 +172,8 @@ function validateFilledRegister($name){
         return "Это поле должно быть заполнено ";
     }
 }
+function validateProjectAdd($text){
+    if(empty($text)){
+        return "Заполнить поле";
+    }
+}

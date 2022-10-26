@@ -2,7 +2,6 @@
 require_once('core/helpers.php');
 require_once ('core/init.php');
 
-var_dump($_POST);
 $errors=[];
 $user=$_POST;
 $rules=[
@@ -21,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
             $errors[$key]=$rule($value);
         }
     }
-    
+
 }
 $errors = array_filter($errors);
 
@@ -34,7 +33,7 @@ if($_SERVER['REQUEST_METHOD']=='POST' && empty($errors)){
     //если количество не равно нулю, то пользователь с такой почтой уже есть, добавить нельзя, формируем ошибку
     if ($stmt->rowCount() == 0){
         $errors['email'] =' Пользователь с этим email нет';
-    } 
+    }
     else{
         $dbUser = $stmt->fetch();//получили данные из бд
         if(password_verify($user['password'],$dbUser['password'])){//сравниваем хэш пароля из бд с введенным

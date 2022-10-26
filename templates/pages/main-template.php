@@ -1,3 +1,4 @@
+
 <main class="content__main">
         <h2 class="content__main-heading">Список задач</h2>
 
@@ -14,7 +15,6 @@
                 <a href="/" class="tasks-switch__item">Завтра</a>
                 <a href="/" class="tasks-switch__item">Просроченные</a>
             </nav>
-
             <label class="checkbox">
 
                 <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if($show_complete_tasks == 1):?> checked   <?php endif; ?>>
@@ -23,6 +23,7 @@
          </div>
 
         <table class="tasks">
+        <?php if($tasks): ?>
             <?php foreach ($tasks as $task): ?>
                 <?php if ($show_complete_tasks === 0 && $task["is_done"]=== 1): ?>
                      <?php continue; ?>
@@ -43,6 +44,12 @@
                     </tr>
                 <?php endif; ?>
             <?php endforeach; ?>
+        <?php else: ?>
+            <p>Авторизуйтесь чтобы увидеть свой список задач</p>
+        <?php endif; ?>
         </table>
+
+
+
     </main>
 

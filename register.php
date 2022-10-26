@@ -2,7 +2,7 @@
 require_once('core/helpers.php');
 require_once ('core/init.php');
 
-var_dump($_POST);
+
 $errors=[];
 $user=$_POST;
 $rules=[
@@ -55,7 +55,7 @@ $page = include_template('layout.php' , [
     'content' => $registercontent,
     'projects'=>$projects,
     'all_tasks' => $all_tasks,
-    'isAuth'=>$isAuth
+    'is_auth'=>$is_auth
 
 ]);
 print($page);

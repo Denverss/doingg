@@ -12,5 +12,4 @@
           <a class="welcome__button button" href="register.php">Зарегистрироваться</a>
         </section>
       </div>
-    </div>
-  </div>
+

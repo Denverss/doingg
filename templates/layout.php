@@ -1,3 +1,6 @@
+<?php
+require_once('core/init.php');
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -8,7 +11,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
 </head>
-
 <body class="body-background">
 <h1 class="visually-hidden">Дела</h1>
 
@@ -18,20 +20,21 @@
                 <a href="/">
                   <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
              </a>
-                <div class="main-header__side">
-                    <?php if ($is_auth==true): ?>
+
+                    <div class="main-header__side">
+                        <?php if ($is_auth===true): ?>
                         <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
                         <div class="main-header__side-item user-menu">
                         <div class="user-menu__data">
                             <p><?= getPostVal('name')?></p>
-                            <a href="guest.php">Выйти</a>
+                            <a href="core/logout.php">Выйти</a>
                         </div>
-
-                    <?php else: ?>
+                            <?php else: ?>
                         <div class="main-header__side-item user-menu">
                         <div class="user-menu__data">
-                        <a href="authorization.php">Авторизация</a>
-                        <a href="register.php">Регистрация</a>
+                        <a class="button button--transparent" href="authorization.php">Войти</a>
+                            <a class="button button--transparent" href="guest.php">Регистрация</a>
+
                         </div>
                     <?php endif; ?>
                  </div>
@@ -40,29 +43,29 @@
 
         <div class="content">
             <section class="content__side">
-                <?php if($is_auth==true):?>
+                <?php if($is_auth===true):?>
                 <h2 class="content__side-heading">Проекты</h2>
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
                         <?php foreach ($projects as $project):?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="index.php?id=<?= $project['id']?>"><?php echo ($project['title']) ?></a>
+                                <a class="main-navigation__list-item-link" href="index-count.php?id=<?= $project['id']?>"><?php echo ($project['title']) ?></a>
                                 <span class="main-navigation__list-item-count"><?php echo(count_project($all_tasks,$project['title'])) ?></span>
                             </li>
                         <?php endforeach;?>
-                       
+
                     </ul>
                 </nav>
 
                 <a class="button button--transparent button--plus content__side-button"
-                   href="pages/form-project-template.php" target="project_add">Добавить проект</a>
+                   href="add-project.php" target="project_add">Добавить проект</a>
                 <? else:?>
                     <h2 class="content__side-heading">Проекты</h2>
                 <?php endif;?>
             </section>
+                    <?= $content; ?>
 
-            <?= $content; ?>
         </div>
     </div>
 </div>
@@ -74,9 +77,11 @@
 
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
-
+        <?php if($is_auth): ?>
         <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
-
+        <?php else: ?>
+        <a></a>
+        <?php endif; ?>
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>
             <a class="social__link social__link--facebook" href="#">

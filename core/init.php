@@ -24,9 +24,16 @@ $all_tasks = getAllTasks($con);
 
 session_start();
 $is_auth = isset($_SESSION['user_id']);
-if ($is_auth=true){
-    $user_name = $_SESSION['user_name'];
+if ($is_auth){
+   $stmt =$con->prepare('SELECT * from projects WHERE user_id=:user_id');
+   $stmt->execute(['user_id'=>$_SESSION['user_id']]);
+   $projects=$stmt->fetchAll();
+
+   $stmt =$con->prepare('SELECT t.id, p.id , t.title, p.title AS project,t.file, t.date_end, t.is_done from tasks t JOIN projects p on t.project_id=p.id WHERE t.user_id=:user_id');
+   $stmt->execute(['user_id'=>$_SESSION['user_id']]);
+   $tasks_id=$stmt->fetchAll();
 }
 else{
-    $user_name = '';
+    $is_auth = '';
+    $tasks_id=[];
 }

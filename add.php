@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST' && empty($errors)) {
     else {
         $task['file'] = null;
     }
-    $task['user_id'] = 1;
+    $task['user_id']=$_SESSION['user_id'];
     $inf =$con->prepare('INSERT INTO tasks SET title=:title, project_id=:project, date_end=:due_date, file=:file, user_id=:user_id');
     $inf->execute($task);
     var_dump(1);
@@ -70,7 +70,8 @@ $page = include_template('layout.php',[
     'content'=>$addContent,
     'title'=> $title,
     'projects'=>$projects,
-    'all_tasks' => $all_tasks
+    'all_tasks' => $all_tasks,
+    'is_auth'=>$is_auth
 ]);
 
 print ($page);

@@ -6,6 +6,7 @@ $guestcontent = include_template('pages/guest-template.php');
 $page = include_template('layout.php' , [
     'content' => $guestcontent,
     'projects'=>$projects,
-    'all_tasks' => $all_tasks
+    'all_tasks' => $all_tasks,
+    'is_auth'=>$is_auth
 ]);
 print($page);
